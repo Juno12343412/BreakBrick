@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerHand = null;
     public GameObject Brick = null;
     public Text scoreText = null;
-    //public GameObject Brick = null;
+    public Text scoreText2 = null;
+    public Text highScoreText = null;
     public Animator PlayerAnim = null;
-    bool gameOver = false;
     float Score = 0;
     float HighScore = 0;
     public List<float> scoreList = null;
@@ -28,11 +28,10 @@ public class GameManager : MonoBehaviour
         titleCanvas.gameObject.SetActive(true);
         ingameCanvas.gameObject.SetActive(false);
         gameOverCanvas.gameObject.SetActive(false);
-        gameOver = false;
         isAttack = false;
         PlayerAnim = PlayerHand.GetComponent<Animator>();
         PlayerAnim.SetBool("Title", true);
-
+        HighScore = PlayerPrefs.GetFloat("HighScore");
     }
     private void Update()
     {
@@ -44,12 +43,11 @@ public class GameManager : MonoBehaviour
                 scoreList.RemoveAt(0);
                 Debug.Log(temp);
             }
-            Score = Mathf.Lerp(Score, temp + 0.1f, 0.1f);
+            Score = Mathf.Lerp(Score, temp + 0.15f, 6.0f * Time.deltaTime);
 
             if (timerGauge.fillAmount <= 0)
             {
                 timerGauge.fillAmount = 0;
-                gameOver = true;
                 GameOver();
                 return;
             }
@@ -67,13 +65,15 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
-            timerGauge.fillAmount -= 0.01f;
+            timerGauge.fillAmount -= (0.01f * difficult);
         }
     }
 
     public bool isGameStart = false;
     public void GameStart()
     {
+        Score = 0;
+        difficult = 1.0f;
         timerGauge.fillAmount = 1;
 
         StartCoroutine(CR_TimerGauge());
@@ -82,12 +82,9 @@ public class GameManager : MonoBehaviour
         ingameCanvas.gameObject.SetActive(true);
         gameOverCanvas.gameObject.SetActive(false);
 
-        gameOver = false;
         isAttack = false;
         PlayerAnim.SetBool("Title", false);
-        Instantiate(Brick, new Vector3(6.7f, -3.1f, 0.0f), Quaternion.identity);
-
-
+        GameObject temp = Instantiate(Brick, new Vector3(6.7f, -3.1f, 0.0f), Quaternion.identity);
     }
 
     public void GameReStart()
@@ -97,7 +94,6 @@ public class GameManager : MonoBehaviour
         ingameCanvas.gameObject.SetActive(false);
         gameOverCanvas.gameObject.SetActive(false);
 
-        gameOver = false;
         PlayerAnim.SetBool("Title", true);
 
     }
@@ -107,6 +103,9 @@ public class GameManager : MonoBehaviour
         gameOverCanvas.gameObject.SetActive(true);
         ingameCanvas.gameObject.SetActive(false);
         titleCanvas.gameObject.SetActive(false);
+        if (PlayerPrefs.GetFloat("HighScore", 0) < Score) PlayerPrefs.SetFloat("HighScore", Score);
+        scoreText2.text = ((int)Score).ToString();
+        highScoreText.text = ((int)PlayerPrefs.GetFloat("HighScore")).ToString();
 
         isGameStart = false;
         StopAllCoroutines();

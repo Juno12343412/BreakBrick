@@ -90,9 +90,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 734416741}
-  - component: {fileID: 734416742}
+  - component: {fileID: 41509599}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ Transform:
   m_Father: {fileID: 1400647575}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &734416742
+--- !u!114 &41509599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 734416740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be824be525a95564c9fec6efda3cab73, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c18ab10938141d43ab37305927783c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1125988177
@@ -358,7 +358,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 19
   m_Sprite: {fileID: 21300000, guid: 0ec261f233c755843a19703f129b23ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -379,11 +379,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1335229293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1182fe6ed9ee2694b9fc048e6d6b846b, type: 3}
+  m_Script: {fileID: 11500000, guid: f346f4fcfb081034789c1cf8d5a54ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
   Gauge: {fileID: 734416740}
+  weakEffect: {fileID: 9182484609187400643, guid: ace0874c6083997489976a1c6a5a4f00,
+    type: 3}
+  middleEffect: {fileID: 5388142638321384654, guid: 3b101133f2015c44c8def4d8f2409bb3,
+    type: 3}
+  highEffect: {fileID: 1237168857023848883, guid: 1e036220877d72a43a761efb3644b640,
+    type: 3}
 --- !u!1 &1400647574
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +485,7 @@ GameObject:
   - component: {fileID: 6303727915112941239}
   - component: {fileID: 6303727915112941224}
   - component: {fileID: 6303727915112941225}
+  - component: {fileID: 561672966}
   m_Layer: 0
   m_Name: Bricks
   m_TagString: Untagged
@@ -539,16 +546,16 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: b87ef7e1caa9ad74a80e7fca042f572f, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.1, y: 3.58}
+  m_Size: {x: 13, y: 15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6303727915112941225
@@ -569,6 +576,7 @@ MonoBehaviour:
   time: 0
   Damage: 0
   isCreate: 1
+  isCreate2: 1
   isDead: 1
   isPass: 0
   isTouch: 0
@@ -577,3 +585,24 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b87ef7e1caa9ad74a80e7fca042f572f, type: 3}
   - {fileID: 21300000, guid: 3595193869fb38d4f9064b0aa4a9cee0, type: 3}
   - {fileID: 21300000, guid: 1851cbbe5a954664687c608619e6fff6, type: 3}
+  Anim: {fileID: 0}
+  Anima: {fileID: 0}
+--- !u!95 &561672966
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303727915112941226}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23b1b316f4fdbe34d9c33562f54eb502, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
