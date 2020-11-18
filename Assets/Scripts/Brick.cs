@@ -78,6 +78,9 @@ public class Brick : MonoBehaviour
                     else
                     {
                         GameManager.GetComponent<GameManager>().timerGauge.fillAmount += time / 100.0f;
+                        StartCoroutine(CR_Fail());
+
+                        GameManager.GetComponent<GameManager>().fail.gameObject.SetActive(true);
                     }
                 }
                 isDead = false;
@@ -97,7 +100,11 @@ public class Brick : MonoBehaviour
                     GameManager.GetComponent<GameManager>().scoreList.Add(score);
                     GameManager.GetComponent<GameManager>().timerGauge.fillAmount -= time / 100.0f; 
                 }
-                
+                else
+                {
+                    StartCoroutine(CR_Fail());
+                    GameManager.GetComponent<GameManager>().fail.gameObject.SetActive(true);
+                }
                 isDead = false;
                 GameManager.GetComponent<GameManager>().difficult += 0.1f;
                 Instantiate(GameManager.GetComponent<GameManager>().Brick, new Vector3(6.7f, -3.1f, 0.0f), Quaternion.identity);
@@ -105,6 +112,13 @@ public class Brick : MonoBehaviour
             
         }
 
+    }
+
+    IEnumerator CR_Fail()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GameManager.GetComponent<GameManager>().fail.gameObject.SetActive(false);
+        
     }
 
     IEnumerator CR_MoveWait()

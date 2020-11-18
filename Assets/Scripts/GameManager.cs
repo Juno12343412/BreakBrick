@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Image timerGauge = null;
+    public Image fail = null;
     public Canvas titleCanvas = null;
     public Canvas ingameCanvas = null;
     public Canvas gameOverCanvas = null;
@@ -72,6 +73,8 @@ public class GameManager : MonoBehaviour
     public bool isGameStart = false;
     public void GameStart()
     {
+        temp = 0;
+        fail.gameObject.SetActive(false);
         Score = 0;
         difficult = 1.0f;
         timerGauge.fillAmount = 1;
@@ -84,11 +87,13 @@ public class GameManager : MonoBehaviour
 
         isAttack = false;
         PlayerAnim.SetBool("Title", false);
-        GameObject temp = Instantiate(Brick, new Vector3(6.7f, -3.1f, 0.0f), Quaternion.identity);
+        GameObject _temp = Instantiate(Brick, new Vector3(6.7f, -3.1f, 0.0f), Quaternion.identity);
     }
 
     public void GameReStart()
     {
+
+        fail.gameObject.SetActive(false);
         isGameStart = false;
         titleCanvas.gameObject.SetActive(true);
         ingameCanvas.gameObject.SetActive(false);
@@ -100,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        fail.gameObject.SetActive(false);
         gameOverCanvas.gameObject.SetActive(true);
         ingameCanvas.gameObject.SetActive(false);
         titleCanvas.gameObject.SetActive(false);
